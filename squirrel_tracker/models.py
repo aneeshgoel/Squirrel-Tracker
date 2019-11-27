@@ -9,6 +9,27 @@ class Squirrel(models.Model):
     TRUE = 'TRUE'
     FALSE = 'FALSE'
 
+    AM = 'AM'
+    PM = 'PM'
+
+    Adult = 'ADULT'
+    Juvenile = 'JUVENILE'
+
+    AGE_CHOICES = (
+            (Adult = 'ADULT'),
+            (Juvenile = 'JUVENILE'),
+        )
+
+    TIME_CHOICES = (
+            (AM = 'AM'),
+            (PM = 'PM'),
+        )
+
+    BINARY_CHOICES = (
+            (TRUE = 'TRUE'),
+            (FALSE = 'FALSE'),
+        )
+
     X = models.DecimalField(
             help_text=_('Longitutde of sighting'),
             max_length=10,
@@ -28,7 +49,20 @@ class Squirrel(models.Model):
             max_length=5,
         )
 
+    Shift = models.CharField(
+            help_text=_('Indication whether the sighting occurred in the afterrnoon or evening'),
+            max_length=10,
+            choices=TIME_CHOICES,
+        )
+    Date = models.DateField(
+            help_text=_('Date of the sighting'),
+        )
 
+    Unique_squirrel_ID = models.CharField(
+            help_text=_('Concatenation of Hectare(after deleting starting 0s) + Shift + first four digits of Date + Hectare squirrel number (after adding 0 in the bgeinning)'),
+            max_length=20,
+            primary_key=True,
+        )
 
             
             
