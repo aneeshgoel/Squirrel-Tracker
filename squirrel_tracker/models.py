@@ -64,5 +64,12 @@ class Squirrel(models.Model):
             primary_key=True,
         )
 
-            
+    Hectare_Squirrel_Number = IntegerField(
+            help_text=_('Number within the chronological sequence of squirrel sightings for a discrete sighting session'),
+            max_length=5,
+            unique=False,
+        )
+
+
+
             
