@@ -64,12 +64,17 @@ class Squirrel(models.Model):
             primary_key=True,
         )
 
-    Hectare_Squirrel_Number = IntegerField(
+    Hectare_Squirrel_Number = model.IntegerField(
             help_text=_('Number within the chronological sequence of squirrel sightings for a discrete sighting session'),
             max_length=5,
             unique=False,
         )
 
-
+    Age = models.CharField(
+            help_text_('Value is either Adult or Juvenile'),
+            max_length=15,
+            choices=AGE_CHOICES,
+            null=True,
+        )
 
             
