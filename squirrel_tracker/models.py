@@ -15,6 +15,11 @@ class Squirrel(models.Model):
     Adult = 'ADULT'
     Juvenile = 'JUVENILE'
 
+    Gray = 'GRAY'
+    Cinnamon = 'CINAMMON'
+    Black = 'BLACK'
+
+
     AGE_CHOICES = (
             (Adult = 'ADULT'),
             (Juvenile = 'JUVENILE'),
@@ -29,6 +34,13 @@ class Squirrel(models.Model):
             (TRUE = 'TRUE'),
             (FALSE = 'FALSE'),
         )
+
+    COLOR_CHOICES = (
+            (Gray = 'GRAY'),
+            (Cinnamon = 'CINNAMON'),
+            (Black  = 'BLACK'),
+        )
+
 
     X = models.DecimalField(
             help_text=_('Longitutde of sighting'),
@@ -71,10 +83,74 @@ class Squirrel(models.Model):
         )
 
     Age = models.CharField(
-            help_text_('Value is either Adult or Juvenile'),
+            help_text=_('Value is either Adult or Juvenile'),
             max_length=15,
             choices=AGE_CHOICES,
             null=True,
         )
+
+    Primary_Fur_Color = models.CharField(
+            help_text=_('Value is either gray, cinnamon or black'),
+            max_length = 10,
+            choices = COLOR_CHOICES,
+            null = True
+        )
+    Highlight_Fur_Color = models.CharFirled(
+            help_text=_(''),
+            max_length - = 10,
+            null = True,
+            choices = COLOR_CHOICES,
+        )
+
+    Combination_of_Primary_and_Highlight_color = models.CharField(
+            help_text=('Addition of primary and highlight fur color with a + sign'),
+        )
+
+    Color_Notes = models.CharField(
+            help_text=_('Additional notes on color'),
+            null = True,
+        )
+
+    GROUND_PLANE = 'GROUND PLANE'
+    ABOVE_GROUND = 'ABOVE GROUND'
+
+    LOCATION= (
+            (GROUND_PLANE = 'GROUND PlANE'),
+            (ABOVE_GROUND = 'ABOVE GROUND'),
+        )
+
+    Location = models.CharField(
+            help_text=_('Either ground plabe or above ground depending on where the sighters located the squirrel'),
+            choices = LOCATION,
+            null = True,
+            max_length = 20,
+        )
+
+    Above_Ground_Sighter_Measurement = models.CharField(
+            help_text=_('If location is above ground then populate with False otherwise fill with a numeric value'),
+            max_length = 10,
+            null = True,
+        )
+
+    Specific_Location = models.CharField(
+            help_text=_('Additional commentary on the squirrel location'),
+            null = True,
+        )
+
+    Running = models.BooleanField(
+            help_text=_('True if squirrel seen running; otherwise False'),
+        )
+
+    Chasing = models.BooleanField(
+
+
+
+
+
+
+
+
+
+
 
             
