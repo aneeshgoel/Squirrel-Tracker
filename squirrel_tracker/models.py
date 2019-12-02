@@ -6,8 +6,6 @@ from django.utils.translation import gettext as _
 
 class Squirrel(models.Model):
 
-    TRUE = 'TRUE'
-    FALSE = 'FALSE'
 
     AM = 'AM'
     PM = 'PM'
@@ -142,6 +140,46 @@ class Squirrel(models.Model):
         )
 
     Chasing = models.BooleanField(
+            help_text=_('True if squirrel was seen chasing;otherwise False'),
+         )
+    Climbing = models.BooleanField(
+            help_text=_('True if Squirrel was seen climbing;otherwise False'),
+        )
+    Eating = models.BooleanField(
+            help_text=_('True if Squirrel is Eating; otherwise False'),
+     )
+    Foraging = models.BooleanField(
+            help_text=_('True if Squirrel is Foraging; otherwise False'),
+     )
+    Other Activities = models.CharField(
+            help_text=_('Activity the Squirrel is performing'),
+            blank=True,
+            )
+    Kuks = models.BooleanField(
+            help_text=_('True if the Squirrel is kuking,a chirpy voice communication; otherwise False'),
+    )
+
+    Quaas = models.BooleanField(
+            help_text=_('True if the Squirrel is Quaaing,an elongated vocal call; otherwise False'),
+     )
+    Moans = models.BooleanField(
+            help_text=_('True if the Squirrel is Moaning,a high pitched vocal communication; otherwise False'),
+            )
+    Tail flags = models.BooleanField(
+            help_text=_('True if the Squirrel is flagging its tail; otherwise False'),
+            )
+    Tail twitching = models.BooleanField(
+            help_text=_('True if the Squirrel is twitching its tail; otherwise False'),
+            )
+    Approaches = models.BooleanField(
+        help_text=_('True if the Squirrel is seen approaching human;otherwise False'),
+            )
+    Indifferent = models.BooleanField(
+            help_text=_('True if squirrel was indifferent to Human; otherwise False'),
+            )
+
+
+
 
 
 
