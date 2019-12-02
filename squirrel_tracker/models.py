@@ -6,14 +6,12 @@ from django.utils.translation import gettext as _
 
 class Squirrel(models.Model):
 
-    TRUE = 'TRUE'
-    FALSE = 'FALSE'
 
     AM = 'AM'
     PM = 'PM'
 
-    Adult = 'ADULT'
-    Juvenile = 'JUVENILE'
+    ADULT = 'ADULT'
+    JUVENILE = 'JUVENILE'
 
     Gray = 'GRAY'
     Cinnamon = 'CINAMMON'
@@ -21,45 +19,35 @@ class Squirrel(models.Model):
 
 
     AGE_CHOICES = (
-            (Adult = 'ADULT'),
-            (Juvenile = 'JUVENILE'),
+            (ADULT, 'ADULT'),
+            (JUVENILE, 'JUVENILE'),
         )
 
     TIME_CHOICES = (
-            (AM = 'AM'),
-            (PM = 'PM'),
+            (AM, 'AM'),
+            (PM, 'PM'),
         )
 
-    BINARY_CHOICES = (
-            (TRUE = 'TRUE'),
-            (FALSE = 'FALSE'),
-        )
 
     COLOR_CHOICES = (
-            (Gray = 'GRAY'),
-            (Cinnamon = 'CINNAMON'),
-            (Black  = 'BLACK'),
+            (Gray, 'GRAY'),
+            (Cinnamon, 'CINNAMON'),
+            (Black, 'BLACK'),
         )
 
 
     X = models.DecimalField(
             help_text=_('Longitutde of sighting'),
-            max_length=10,
-            max_digits=2,
-            decimal_places=5,
+            max_digits=20,
+            decimal_places=15,
         )
 
     Y = models.DecimalField(
             help_text=_('Latitude of sighting'),
-            max_length=10,
-            max_digits=2,
-            decimal_places=5,
+            max_digits =20,
+            decimal_places = 15,
         )
     
-    Hectare = models.CharField(
-            help_text=_('ID tag; derived from hectare grid'),
-            max_length=5,
-        )
 
     Shift = models.CharField(
             help_text=_('Indication whether the sighting occurred in the afterrnoon or evening'),
@@ -76,65 +64,40 @@ class Squirrel(models.Model):
             primary_key=True,
         )
 
-    Hectare_Squirrel_Number = model.IntegerField(
-            help_text=_('Number within the chronological sequence of squirrel sightings for a discrete sighting session'),
-            max_length=5,
-            unique=False,
-        )
-
     Age = models.CharField(
             help_text=_('Value is either Adult or Juvenile'),
             max_length=15,
             choices=AGE_CHOICES,
-            null=True,
+            blank=True,
         )
 
     Primary_Fur_Color = models.CharField(
             help_text=_('Value is either gray, cinnamon or black'),
             max_length = 10,
             choices = COLOR_CHOICES,
-            null = True
-        )
-    Highlight_Fur_Color = models.CharFirled(
-            help_text=_(''),
-            max_length - = 10,
-            null = True,
-            choices = COLOR_CHOICES,
+            blank = True
         )
 
-    Combination_of_Primary_and_Highlight_color = models.CharField(
-            help_text=('Addition of primary and highlight fur color with a + sign'),
-        )
-
-    Color_Notes = models.CharField(
-            help_text=_('Additional notes on color'),
-            null = True,
-        )
 
     GROUND_PLANE = 'GROUND PLANE'
     ABOVE_GROUND = 'ABOVE GROUND'
 
     LOCATION= (
-            (GROUND_PLANE = 'GROUND PlANE'),
-            (ABOVE_GROUND = 'ABOVE GROUND'),
+            (GROUND_PLANE, 'GROUND PlANE'),
+            (ABOVE_GROUND, 'ABOVE GROUND'),
         )
 
     Location = models.CharField(
             help_text=_('Either ground plabe or above ground depending on where the sighters located the squirrel'),
             choices = LOCATION,
-            null = True,
+            blank = True,
             max_length = 20,
-        )
-
-    Above_Ground_Sighter_Measurement = models.CharField(
-            help_text=_('If location is above ground then populate with False otherwise fill with a numeric value'),
-            max_length = 10,
-            null = True,
         )
 
     Specific_Location = models.CharField(
             help_text=_('Additional commentary on the squirrel location'),
-            null = True,
+            blank = True,
+            max_length = 100,
         )
 
     Running = models.BooleanField(
@@ -142,6 +105,60 @@ class Squirrel(models.Model):
         )
 
     Chasing = models.BooleanField(
+            help_text=_('True if squirrel was seen chasing;otherwise False'),
+         )
+    Climbing = models.BooleanField(
+            help_text=_('True if Squirrel was seen climbing;otherwise False'),
+        )
+    Eating = models.BooleanField(
+            help_text=_('True if Squirrel is Eating; otherwise False'),
+        )
+     
+    Foraging = models.BooleanField(
+            help_text=_('True if Squirrel is Foraging; otherwise False'),
+        )
+     
+    Other_Activities = models.CharField(
+            help_text=_('Activity the Squirrel is performing'),
+            blank=True,
+            max_length = 100,
+        )
+            
+    Kuks = models.BooleanField(
+            help_text=_('True if the Squirrel is kuking,a chirpy voice communication; otherwise False'),
+        )
+    
+
+    Quaas = models.BooleanField(
+            help_text=_('True if the Squirrel is Quaaing,an elongated vocal call; otherwise False'),
+        )
+     
+    Moans = models.BooleanField(
+            help_text=_('True if the Squirrel is Moaning,a high pitched vocal communication; otherwise False'),
+        )
+            
+    Tail_flags = models.BooleanField(
+            help_text=_('True if the Squirrel is flagging its tail; otherwise False'),
+        )
+            
+    Tail_twitching = models.BooleanField(
+            help_text=_('True if the Squirrel is twitching its tail; otherwise False'),
+        )
+            
+    Approaches = models.BooleanField(
+        help_text=_('True if the Squirrel is seen approaching human;otherwise False'),
+        )
+            
+    Indifferent = models.BooleanField(
+            help_text=_('True if squirrel was indifferent to Human; otherwise False'),
+        )
+    Runs_from = models.BooleanField(
+            help_text=_('True if Squirrel was seen running from humans; otherwise false'),
+        )
+            
+
+
+
 
 
 
