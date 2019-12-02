@@ -10,8 +10,8 @@ class Squirrel(models.Model):
     AM = 'AM'
     PM = 'PM'
 
-    Adult = 'ADULT'
-    Juvenile = 'JUVENILE'
+    ADULT = 'ADULT'
+    JUVENILE = 'JUVENILE'
 
     Gray = 'GRAY'
     Cinnamon = 'CINAMMON'
@@ -19,35 +19,33 @@ class Squirrel(models.Model):
 
 
     AGE_CHOICES = (
-            (Adult = 'ADULT'),
-            (Juvenile = 'JUVENILE'),
+            (ADULT, 'ADULT'),
+            (JUVENILE, 'JUVENILE'),
         )
 
     TIME_CHOICES = (
-            (AM = 'AM'),
-            (PM = 'PM'),
+            (AM, 'AM'),
+            (PM, 'PM'),
         )
 
 
     COLOR_CHOICES = (
-            (Gray = 'GRAY'),
-            (Cinnamon = 'CINNAMON'),
-            (Black  = 'BLACK'),
+            (Gray, 'GRAY'),
+            (Cinnamon, 'CINNAMON'),
+            (Black, 'BLACK'),
         )
 
 
     X = models.DecimalField(
             help_text=_('Longitutde of sighting'),
-            max_length=10,
-            max_digits=2,
-            decimal_places=5,
+            max_digits=20,
+            decimal_places=15,
         )
 
     Y = models.DecimalField(
             help_text=_('Latitude of sighting'),
-            max_length=10,
-            max_digits=2,
-            decimal_places=5,
+            max_digits =20,
+            decimal_places = 15,
         )
     
 
@@ -85,8 +83,8 @@ class Squirrel(models.Model):
     ABOVE_GROUND = 'ABOVE GROUND'
 
     LOCATION= (
-            (GROUND_PLANE = 'GROUND PlANE'),
-            (ABOVE_GROUND = 'ABOVE GROUND'),
+            (GROUND_PLANE, 'GROUND PlANE'),
+            (ABOVE_GROUND, 'ABOVE GROUND'),
         )
 
     Location = models.CharField(
@@ -99,6 +97,7 @@ class Squirrel(models.Model):
     Specific_Location = models.CharField(
             help_text=_('Additional commentary on the squirrel location'),
             blank = True,
+            max_length = 100,
         )
 
     Running = models.BooleanField(
@@ -119,9 +118,10 @@ class Squirrel(models.Model):
             help_text=_('True if Squirrel is Foraging; otherwise False'),
         )
      
-    Other Activities = models.CharField(
+    Other_Activities = models.CharField(
             help_text=_('Activity the Squirrel is performing'),
             blank=True,
+            max_length = 100,
         )
             
     Kuks = models.BooleanField(
@@ -137,11 +137,11 @@ class Squirrel(models.Model):
             help_text=_('True if the Squirrel is Moaning,a high pitched vocal communication; otherwise False'),
         )
             
-    Tail flags = models.BooleanField(
+    Tail_flags = models.BooleanField(
             help_text=_('True if the Squirrel is flagging its tail; otherwise False'),
         )
             
-    Tail twitching = models.BooleanField(
+    Tail_twitching = models.BooleanField(
             help_text=_('True if the Squirrel is twitching its tail; otherwise False'),
         )
             
