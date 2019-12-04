@@ -61,7 +61,7 @@ class Squirrel(models.Model):
     Unique_squirrel_ID = models.CharField(
             help_text=_('Concatenation of Hectare(after deleting starting 0s) + Shift + first four digits of Date + Hectare squirrel number (after adding 0 in the bgeinning)'),
             max_length=20,
-            primary_key=True,
+            primary_key = True,
         )
 
     Age = models.CharField(
@@ -155,6 +155,9 @@ class Squirrel(models.Model):
     Runs_from = models.BooleanField(
             help_text=_('True if Squirrel was seen running from humans; otherwise false'),
         )
+
+    def __str__(self):
+        return self.Unique_squirrel_ID
             
 
 

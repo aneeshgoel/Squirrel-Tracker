@@ -12,15 +12,24 @@ from .models import Squirrel
 #    return HttpResponse("Hello, world. You're at the squirrel tracker  index.")
 
 def get_map(request):
-    return HttpResponse("Hello this is the map view")
+    sight = Squirrel.objects.all()[:50]
+    context ={
+            'sightings' :sight,
+        }
+    return render(request, 'squirrel_tracker/map.html',context)
 
 
 def get_sighting(request):
-    return HttpResponse('Hello this is the sigthing view')
+    squirrels = Squirrel.objects.all()
+    context = {
+            'squirrels': squirrels,
+        }
+    return render(request, 'squirrel_tracker/sighting.html',context)
 
 
-def get_particular_sighting(request):
-    return HttpResponse('Hello this is a particular sightinig view')
+def get_particular_sighting(request, unique_squirrel_ID):
+    squirrel = Squirrel.objects.get(Unique_squirrel_ID = unique_squirrel_ID)
+    return HttpResponse(squirrel.Unique_squirrel_ID)
 
 
 def post_add_sighting(request):
