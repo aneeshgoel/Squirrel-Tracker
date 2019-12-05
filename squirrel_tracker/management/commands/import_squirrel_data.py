@@ -4,6 +4,8 @@ from django.core.management.base import BaseCommand
 
 from squirrel_tracker.models import Squirrel
 
+from distutils.util import strtobool
+
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
@@ -14,8 +16,10 @@ class Command(BaseCommand):
         with open(options['csv_file']) as fp:
             reader = csv.DictReader(fp)
             data = list(reader)
+           # print(data)
 
         for item in data:
+           # print(f'reading {item}')
             s = Squirrel(
                 X=item['X'],
                 Y=item['Y'],
@@ -26,19 +30,20 @@ class Command(BaseCommand):
                 Primary_Fur_Color=item['Primary Fur Color'],
                 Location=item['Location'],
                 Specific_Location=item['Specific Location'],
-                Running=item['Running'],
-                Chasing=item['Chasing'],
-                Climbing=item['Climbing'],
-                Eating=item['Eating'],
-                Foraging=item['Foraging'],
+                Running=strtobool(item['Running']),
+                Chasing=strtobool(item['Chasing']),
+                Climbing=strtobool(item['Climbing']),
+                Eating=strtobool(item['Eating']),
+                Foraging=strtobool(item['Foraging']),
                 Other_Activities=item['Other Activities'],
-                Kuks=item['Kuks'],
-                Quaas=item['Quaas'],
-                Moans=item['Moans'],
-                Tail_flags=item['Tail flags'],
-                Tail_twitching=item['Tail twitches'],
-                Approaches=item['Approaches'],
-                Indifferent=item['Indifferent'],
-                Runs_from=item['Runs from'],
+                Kuks=strtobool(item['Kuks']),
+                Quaas=strtobool(item['Quaas']),
+                Moans=strtobool(item['Moans']),
+                Tail_flags=strtobool(item['Tail flags']),
+                Tail_twitching=strtobool(item['Tail twitches']),
+                Approaches=strtobool(item['Approaches']),
+                Indifferent=strtobool(item['Indifferent']),
+                Runs_from=strtobool(item['Runs from']),
             )
             s.save()
+           # print(f'read {item}')
