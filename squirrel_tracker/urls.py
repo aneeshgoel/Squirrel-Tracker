@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+app_name = 'squirrel_tracker'
+
 urlpatterns = [
     path('map', views.get_map, name='map'),
     path('sightings/',views.get_sighting, name='sighting'),
