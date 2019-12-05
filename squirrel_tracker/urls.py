@@ -7,8 +7,7 @@ app_name = 'squirrel_tracker'
 urlpatterns = [
     path('map', views.get_map, name='map'),
     path('sightings/',views.get_sighting, name='sighting'),
-    path('sightings/<str:unique_squirrel_ID>/',views.get_particular_sighting, name = 'particular_sighting'),
-    path('sightings/add',views.post_add_sighting, name = 'add_sighting'),
-    path('sightings/12', views.delete_sighting, name = 'delete_sighting'),
+    path('sightings/<str:Unique_squirrel_ID>/',views.edit_squirrel, name = 'edit_sighting'),
+    path('sightings/add',views.add_squirrel, name = 'add_sighting'),
     path('sightings/stats', views.get_stats, name = 'stats'),
     ]
