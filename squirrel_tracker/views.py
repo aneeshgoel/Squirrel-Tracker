@@ -1,35 +1,64 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 # Create your views here
 
 from django.http import HttpResponse
 
-from .models import Squirrel 
+from .models import Squirrel
+
+from .forms import SquirrelForm
 
 
 #def index(request):
 #    return HttpResponse("Hello, world. You're at the squirrel tracker  index.")
 
 def get_map(request):
-    return HttpResponse("Hello this is the map view")
+    sight = Squirrel.objects.all()[:50]
+    context ={
+            'sightings' :sight,
+        }
+    return render(request, 'squirrel_tracker/map.html',context)
 
 
 def get_sighting(request):
-    return HttpResponse('Hello this is the sigthing view')
+    squirrels = Squirrel.objects.all()
+    context = {
+            'squirrels': squirrels,
+        }
+    return render(request, 'squirrel_tracker/sighting.html',context)
 
 
-def get_particular_sighting(request):
-    return HttpResponse('Hello this is a particular sightinig view')
+def edit_squirrel(request, Unique_squirrel_ID):
+    squirrel = Squirrel.objects.get(Unique_squirrel_ID = Unique_squirrel_ID)
+    if request.method == "POST":
+        form= SquirrelForm(request.POST, instance = squirrel)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/sightings')
+    else:
+        form = SquirrelForm(instance= squirrel)
+    context ={
+            'form':form
+        }
+
+    return render(request,'squirrel_tracker/edit.html',context)
 
 
-def post_add_sighting(request):
-    return HttpResponse('Hello this is a add sighting view')
 
+def add_squirrel(request):
+    if request.method == "POST":
+        form= SquirrelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/sightings')
+    else:
+        form = SquirrelForm()
+    context ={
+            'form':form,
+        }
+    return render(request,'squirrel_tracker/edit.html',context)
 
-
-def delete_sighting(request):
-    return HttpResponse('Hello this a view to delete sighting')
 
 
 
