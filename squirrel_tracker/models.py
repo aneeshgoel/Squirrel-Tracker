@@ -47,6 +47,7 @@ class Squirrel(models.Model):
             help_text=_('Latitude of sighting'),
             max_digits =20,
             decimal_places = 15,
+            blank = True,
         )
     
 
@@ -54,6 +55,7 @@ class Squirrel(models.Model):
             help_text=_('Indication whether the sighting occurred in the afterrnoon or evening'),
             max_length=10,
             choices=TIME_CHOICES,
+            blank = True,
         )
     Date = models.IntegerField(
             help_text=_('Date of the sighting'),
@@ -78,7 +80,7 @@ class Squirrel(models.Model):
             help_text=_('Value is either gray, cinnamon or black'),
             max_length = 10,
             choices = COLOR_CHOICES,
-            blank = True
+            blank = True,
         )
 
 
