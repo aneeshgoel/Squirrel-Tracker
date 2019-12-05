@@ -1,36 +1,22 @@
-{% extends 'squirrel_tracker/all.html' %}
+<!doctype>
+<html>
+	<head>
+		<title> This is the Sightings view </title>\
+		<h1> This is the Sightings view </h1>
+	</head>
 
-{% block main %}
-  <div class="album py-5 bg-light">
-    <div class="container">
+	<body>
+		<h2> click below to add a new squirrel</h2>
+		<p> <a href = '/sightings/add'> Add New Sighting </a> </p>
+		<h2> Click on the squirrel ID to update the Entry</h2>
+		<p>
+			<ul>
+				{% for squirrel in squirrels %}
+				<li><a href = '/sightings/{{ squirrel.Unique_squirrel_ID}}'>{{squirrel.Unique_squirrel_ID}}</a></li>
+				{% endfor %}
+			</ul>
+		</p>
+	</body>
+</html>
 
-      <div class="row">
-        {% for squirrel in squirrels %}
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-		  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{squirrel.Age}}</text></svg>
-            <div class="card-body">
-              <p class="card-text">
-                <strong>{{ squirrel.Unique_squirrel_ID }}</strong>
-		"The coordinates are"
-                <br>
-		{{ squirrel.X }}
-		<br>
-		{{squirrel.Y}}
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-		<div class="btn-group">
-			      <a class="btn btn-sm btn-outline-secondary" href="{% url 'squirrel_tracker:sighting' %}">View</a>
-		</div>
-                <small class="text-muted">{{ pet.birth_date }}</small>
-		<small class = "text-muted">{{squirrel.Shift}}</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-{% endblock %}
 
