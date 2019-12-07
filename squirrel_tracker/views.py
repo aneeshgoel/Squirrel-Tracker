@@ -13,8 +13,12 @@ from .forms import SquirrelForm
 #def index(request):
 #    return HttpResponse("Hello, world. You're at the squirrel tracker  index.")
 
+def main_page(request):
+    squirrel = 'Squirrel Tracker'
+    return render(request, 'squirrel_tracker/main.html',{'Squirrel': squirrel})
+
 def get_map(request):
-    sight = Squirrel.objects.all()[:50]
+    sight = Squirrel.objects.all()[:100]
     context ={
             'sightings' :sight,
         }
@@ -63,7 +67,34 @@ def add_squirrel(request):
 
 
 def get_stats(request):
-    return HttpResponse('Hello this is a view to get stats')
+    am_count = 0
+    pm_count = 0
+    running_count = 0
+    foraging_count = 0
+    approaches_count = 0
+    moans_count = 0
+    for  s in  Squirrel.objects.all():
+       if s.Shift == 'AM':
+           am_count += 1
+       elif s.Shift == 'PM':
+            pm_count += 1
+       if s.Running == True:
+            running_count += 1
+       if s.Foraging == True:
+            foraging_count += 1
+       if s.Approaches == True:
+            approaches_count += 1
+       if s.Moans == True:
+            moans_count += 1
+    context ={ 
+             'AM_count' : am_count,
+             'PM_count' : pm_count,
+             'Running_count' : running_count,
+             'Foraging_count' : foraging_count,
+             'Approaches_count' : approaches_count,
+             'Moans_count' : moans_count,
+        }
+    return render(request, 'squirrel_tracker/stat.html', context)
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
